@@ -2,7 +2,7 @@
 
 namespace Y2024.Solvers;
 
-public class Day_One : Solver
+public abstract class DayOne : Solver
 {
    public static int Part_One()
    {
@@ -11,22 +11,15 @@ public class Day_One : Solver
       var rightNums = new List<int>();
       foreach (var line in lines)
       {
-         var nums = line.Split(" ").Where(s => s != "").ToArray();
-         leftNums.Add(int.Parse(nums[0]));
-         rightNums.Add(int.Parse(nums[1]));
+         var nums = line.Split(" ").Where(s => s != "").Select(int.Parse).ToArray();
+         leftNums.Add(nums[0]);
+         rightNums.Add(nums[1]);
       }
 
       leftNums.Sort();
       rightNums.Sort();
 
-      var result = 0;
-      for (var i = 0; i < leftNums.Count; ++i)
-      {
-         var diff = Math.Abs(leftNums[i] - rightNums[i]);
-         result += diff;
-      }
-
-      return result;
+      return leftNums.Select((val, idx) => Math.Abs(val - rightNums[idx])).Sum();
    }
 
    public static int Part_Two()
@@ -47,12 +40,10 @@ public class Day_One : Solver
          rightNums[rightNum] = prevCount + 1;
       }
 
-      var result = 0;
-      foreach (var num in leftNums)
+      return leftNums.Select(num =>
       {
          rightNums.TryGetValue(num, out var count);
-         result += num * count;
-      }
-      return result;
+         return num * count;
+      }).Sum();
    }
 }

@@ -2,7 +2,7 @@
 
 public class Solver
 {
-    public static string Input(string name)
+    protected static string Input(string name)
     {
         return $@"C:\Users\kello\RiderProjects\AdventOfCode\Y2024\Input\{name}.txt";
     }
