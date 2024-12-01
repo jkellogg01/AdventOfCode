@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿namespace Y2024.Solvers;
 
-namespace Y2024.Solvers;
-
-public abstract class DayOne : Solver
+public abstract class DayOne
 {
+   private static SolutionInput input = new SolutionInput(1);
+   
    public static int Part_One()
    {
-      var lines = InputLines(1, false);
+      var lines = input.Lines();
       var leftNums = new List<int>();
       var rightNums = new List<int>();
       foreach (var line in lines)
@@ -24,7 +24,7 @@ public abstract class DayOne : Solver
 
    public static int Part_Two()
    {
-      var lines = InputLines(1, false);
+      var lines = input.Lines();
       var leftNums = new List<int>();
       var rightNums = new Dictionary<int, int>();
       foreach (var line in lines)
