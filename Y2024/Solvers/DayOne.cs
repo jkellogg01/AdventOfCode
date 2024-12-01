@@ -6,7 +6,7 @@ public abstract class DayOne : Solver
 {
    public static int Part_One()
    {
-      var lines = File.ReadLines(Input("Day_01"));
+      var lines = InputLines(1, false);
       var leftNums = new List<int>();
       var rightNums = new List<int>();
       foreach (var line in lines)
@@ -24,7 +24,7 @@ public abstract class DayOne : Solver
 
    public static int Part_Two()
    {
-      var lines = File.ReadLines(Input("Day_01"));
+      var lines = InputLines(1, false);
       var leftNums = new List<int>();
       var rightNums = new Dictionary<int, int>();
       foreach (var line in lines)
