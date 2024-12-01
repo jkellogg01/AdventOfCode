@@ -6,7 +6,7 @@ public class Day_One : Solver
 {
    public static int Part_One()
    {
-      var lines = File.ReadLines(Input("01-01"));
+      var lines = File.ReadLines(Input("Day_01"));
       var leftNums = new List<int>();
       var rightNums = new List<int>();
       foreach (var line in lines)
@@ -31,6 +31,28 @@ public class Day_One : Solver
 
    public static int Part_Two()
    {
-      throw new NotImplementedException();
+      var lines = File.ReadLines(Input("Day_01"));
+      var leftNums = new List<int>();
+      var rightNums = new Dictionary<int, int>();
+      foreach (var line in lines)
+      {
+         var nums = line.Split(" ").Where(s => s != "").ToArray();
+         leftNums.Add(int.Parse(nums[0]));
+         var rightNum = int.Parse(nums[1]);
+         if (!rightNums.TryGetValue(rightNum, out var prevCount))
+         {
+            rightNums.Add(rightNum, 1);
+         }
+
+         rightNums[rightNum] = prevCount + 1;
+      }
+
+      var result = 0;
+      foreach (var num in leftNums)
+      {
+         rightNums.TryGetValue(num, out var count);
+         result += num * count;
+      }
+      return result;
    }
 }
