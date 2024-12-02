@@ -6,7 +6,7 @@ public static class DayTwo
 {
     private static readonly SolutionInput input = new SolutionInput(2);
 
-    public static int Part_One()
+    public static int PartOne()
     {
         return input
             .Lines()
@@ -14,10 +14,10 @@ public static class DayTwo
                 .Split(" ")
                 .Select(int.Parse)
                 .ToArray())
-            .Count(nums => deltasInsideBounds(nums, 1, 3) && constantChangeDirection(nums));
+            .Count(nums => DeltasInsideBounds(nums, 1, 3) && ConstantChangeDirection(nums));
     }
 
-    public static int Part_Two()
+    public static int PartTwo()
     {
         return input
             .Lines()
@@ -25,24 +25,24 @@ public static class DayTwo
                 .Split(" ")
                 .Select(int.Parse)
                 .ToArray())
-            .Count(safe_two);
+            .Count(DampenedSafe);
     }
 
-    private static bool safe_two(int[] nums)
+    private static bool DampenedSafe(int[] nums)
     {
         for (var i = 0; i < nums.Length; i++)
         {
             var numsSkipping = nums.Where((_, idx) => idx != i).ToArray();
-            var safe = deltasInsideBounds(numsSkipping, 1, 3) && constantChangeDirection(numsSkipping);
+            var safe = DeltasInsideBounds(numsSkipping, 1, 3) && ConstantChangeDirection(numsSkipping);
             if (!safe) continue;
-            Console.WriteLine($"[{numString(numsSkipping)}] SAFE!");
+            Console.WriteLine($"[{NumString(numsSkipping)}] SAFE!");
             return true;
         }
 
         return false;
     }
 
-    private static bool deltasInsideBounds(int[] nums, int min, int max)
+    private static bool DeltasInsideBounds(int[] nums, int min, int max)
     {
         var prev = nums[0];
         return nums.Skip(1).All(num =>
@@ -50,12 +50,12 @@ public static class DayTwo
             var delta = Math.Abs(num - prev);
             var result = delta >= min && delta <= max;
             prev = num;
-            if (!result) Console.WriteLine($"[{numString(nums)}] unsafe: out-of-bounds-delta <{delta}>");
+            if (!result) Console.WriteLine($"[{NumString(nums)}] unsafe: out-of-bounds-delta <{delta}>");
             return result;
         });
     }
     
-    private static bool constantChangeDirection(int[] nums)
+    private static bool ConstantChangeDirection(int[] nums)
     {
         var result = true;
         var prev = 0;
@@ -78,11 +78,11 @@ public static class DayTwo
             prev = curr;
         }
 
-        if (!result) Console.WriteLine($"[{numString(nums)}] unsafe: non-constant direction");
+        if (!result) Console.WriteLine($"[{NumString(nums)}] unsafe: non-constant direction");
         return result;
     }
     
-    private static string numString(int[] nums)
+    private static string NumString(int[] nums)
     {
         var result = new StringBuilder();
         result.Append(' ');

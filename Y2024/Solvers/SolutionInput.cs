@@ -2,7 +2,6 @@
 
 public class SolutionInput(int day)
 {
-    private string Path() => Path(false);
     private string Path(bool test) => $"Input/Day_{day:D2}{(test ? "t" : "")}.txt";
 
     public IEnumerable<string> Lines() => Lines(false);

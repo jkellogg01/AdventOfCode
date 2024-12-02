@@ -2,9 +2,9 @@
 
 public abstract class DayOne
 {
-   private static SolutionInput input = new SolutionInput(1);
+   private static readonly SolutionInput input = new SolutionInput(1);
    
-   public static int Part_One()
+   public static int PartOne()
    {
       var lines = input.Lines();
       var leftNums = new List<int>();
@@ -22,7 +22,7 @@ public abstract class DayOne
       return leftNums.Select((val, idx) => Math.Abs(val - rightNums[idx])).Sum();
    }
 
-   public static int Part_Two()
+   public static int PartTwo()
    {
       var lines = input.Lines();
       var leftNums = new List<int>();
