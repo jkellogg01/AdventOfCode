@@ -14,7 +14,7 @@ public static class DayTwo
                 .Split(" ")
                 .Select(int.Parse)
                 .ToArray())
-            .Count(nums => DeltasInsideBounds(nums, 1, 3) && ConstantChangeDirection(nums));
+            .Count(Safe);
     }
 
     public static int PartTwo()
@@ -28,6 +28,8 @@ public static class DayTwo
             .Count(DampenedSafe);
     }
 
+    private static bool Safe(int[] nums) => DeltasInsideBounds(nums, 1, 3) && ConstantChangeDirection(nums);
+
     private static bool DampenedSafe(int[] nums)
     {
         for (var i = 0; i < nums.Length; i++)
@@ -35,7 +37,6 @@ public static class DayTwo
             var numsSkipping = nums.Where((_, idx) => idx != i).ToArray();
             var safe = DeltasInsideBounds(numsSkipping, 1, 3) && ConstantChangeDirection(numsSkipping);
             if (!safe) continue;
-            Console.WriteLine($"[{NumString(numsSkipping)}] SAFE!");
             return true;
         }
 
@@ -50,7 +51,6 @@ public static class DayTwo
             var delta = Math.Abs(num - prev);
             var result = delta >= min && delta <= max;
             prev = num;
-            if (!result) Console.WriteLine($"[{NumString(nums)}] unsafe: out-of-bounds-delta <{delta}>");
             return result;
         });
     }
@@ -78,7 +78,6 @@ public static class DayTwo
             prev = curr;
         }
 
-        if (!result) Console.WriteLine($"[{NumString(nums)}] unsafe: non-constant direction");
         return result;
     }
     
