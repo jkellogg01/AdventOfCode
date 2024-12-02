@@ -4,3 +4,5 @@ using Y2024.Solvers;
 
 Console.WriteLine(DayOne.Part_One());
 Console.WriteLine(DayOne.Part_Two());
+Console.WriteLine(DayTwo.Part_One());
+Console.WriteLine(DayTwo.Part_Two());
