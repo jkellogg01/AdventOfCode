@@ -33,7 +33,7 @@ public abstract class DayThree
             sum += SumInstructions(data[from..until]);
             try {
                 from = enables.First(e => e > until);
-            } catch (InvalidOperationException e) {
+            } catch (InvalidOperationException) {
                 return sum;
             }
         }
