@@ -1,3 +1,5 @@
+using Microsoft.VisualBasic;
+
 namespace Y2024.Solvers;
 
 public abstract class DayFour
@@ -20,7 +22,7 @@ public abstract class DayFour
                 var next = line.IndexOf('X');
                 if (next == -1) break;
                 startCoords.Add((i, next + lineOffset));
-                Console.WriteLine($"X at [{i + 1}:{next + lineOffset + 1}]");
+                // Console.WriteLine($"X at [{i + 1}:{next + lineOffset + 1}]");
                 line = line[(next + 1)..];
                 lineOffset += next + 1;
             }
@@ -28,7 +30,7 @@ public abstract class DayFour
         var sum = 0;
         foreach(var coord in startCoords)
         {
-            Console.WriteLine($"search from [{coord.Item1 + 1}:{coord.Item2 + 1}]");
+            // Console.WriteLine($"search from [{coord.Item1 + 1}:{coord.Item2 + 1}]");
             var needle = "MAS";
             foreach(var direction in directions) {
                 if (Search(needle, data, coord, direction)) sum += 1;
@@ -39,7 +41,44 @@ public abstract class DayFour
 
     public static int PartTwo()
     {
-        throw new NotImplementedException();
+        var data = input.AllLines(true);
+
+        var mStartCoords = new List<(int, int)>();
+        var sStartCoords = new List<(int, int)>();
+        for (int i = 0; i < data.Length; i++)
+        {
+            var line = data[i];
+            var mLineOffset = 0;
+            while (true)
+            {
+                var next = line[mLineOffset..].IndexOf('M');
+                if (next == -1) break;
+                mStartCoords.Add((i, next + mLineOffset));
+                mLineOffset += next + 1;
+            }
+            var sLineOffset = 0;
+            while (true)
+            {
+                var next = line[sLineOffset..].IndexOf('S');
+                if (next == -1) break;
+                sStartCoords.Add((i, next + sLineOffset));
+                sLineOffset += next + 1;
+            }
+        }
+        var sum = 0;
+        foreach (var coord in mStartCoords)
+        {
+            if (!Search("AS", data, coord, (1, 1))) continue;
+            var nextCoord = (coord.Item1 + 3, coord.Item2 - 1);
+            if (Search("MAS", data, nextCoord, (-1, 1)) || Search("SAM", data, nextCoord, (-1, 1))) sum += 1;
+        }
+        foreach (var coord in sStartCoords)
+        {
+            if (!Search("AM", data, coord, (1, 1))) continue;
+            var nextCoord = (coord.Item1 + 3, coord.Item2 - 1);
+            if (Search("MAS", data, nextCoord, (-1, 1)) || Search("SAM", data, nextCoord, (-1, 1))) sum += 1;
+        }
+        return sum;
     }
 
     private static bool Search(string needle, string[] haystack, (int, int) start, (int, int) direction)
