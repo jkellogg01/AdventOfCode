@@ -22,7 +22,6 @@ public abstract class DayFour
                 var next = line.IndexOf('X');
                 if (next == -1) break;
                 startCoords.Add((i, next + lineOffset));
-                // Console.WriteLine($"X at [{i + 1}:{next + lineOffset + 1}]");
                 line = line[(next + 1)..];
                 lineOffset += next + 1;
             }
@@ -30,7 +29,6 @@ public abstract class DayFour
         var sum = 0;
         foreach(var coord in startCoords)
         {
-            // Console.WriteLine($"search from [{coord.Item1 + 1}:{coord.Item2 + 1}]");
             var needle = "MAS";
             foreach(var direction in directions) {
                 if (Search(needle, data, coord, direction)) sum += 1;
@@ -85,15 +83,12 @@ public abstract class DayFour
     {
         if (needle == "") 
         {
-            Console.WriteLine($"found at [{start.Item1 + 1}:{start.Item2 + 1}] in direction [{direction.Item1}:{direction.Item2}]");
             return true;
         }
-        // Console.WriteLine($"needle: {needle}");
         var next = (start.Item1 + direction.Item1, start.Item2 + direction.Item2);
         if (next.Item1 >= haystack.Length || next.Item1 < 0) return false;
         if (next.Item2 >= haystack[next.Item1].Length || next.Item2 < 0) return false;
         var atNext = haystack[next.Item1][next.Item2];
-        // Console.WriteLine($"[{next.Item1 + 1}:{next.Item2 + 1}] found {atNext} expecting {needle[0]}");
         if (atNext != needle[0]) return false;
         return Search(needle[1..], haystack, next, direction);
     }
