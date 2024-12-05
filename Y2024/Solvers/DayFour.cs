@@ -1,5 +1,3 @@
-using Microsoft.VisualBasic;
-
 namespace Y2024.Solvers;
 
 public abstract class DayFour
@@ -10,7 +8,7 @@ public abstract class DayFour
 
     public static int PartOne()
     {
-        var data = input.AllLines(false);
+        var data = input.AllLines();
 
         var startCoords = new List<(int, int)>();
         for (int i = 0; i < data.Length; i++)
@@ -39,7 +37,7 @@ public abstract class DayFour
 
     public static int PartTwo()
     {
-        var data = input.AllLines(true);
+        var data = input.AllLines();
 
         var mStartCoords = new List<(int, int)>();
         var sStartCoords = new List<(int, int)>();
