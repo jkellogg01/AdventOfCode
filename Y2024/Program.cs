@@ -12,3 +12,5 @@ Console.WriteLine(DayFour.PartOne());
 Console.WriteLine(DayFour.PartTwo());
 Console.WriteLine(DayFive.PartOne());
 Console.WriteLine(DayFive.PartTwo());
+Console.WriteLine(DaySix.PartOne());
+Console.WriteLine(DaySix.PartTwo());
