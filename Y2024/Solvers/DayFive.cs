@@ -13,9 +13,9 @@ public abstract class DayFive
         var sum = 0;
         foreach (var update in UpdatesFollowRules(updates, rules))
         {
-            Console.WriteLine(update.Select(e => e.ToString()).Aggregate((acc, e) => acc + " " + e));
+            // Console.WriteLine(update.Select(e => e.ToString()).Aggregate((acc, e) => acc + " " + e));
             var middle = update.Length / 2;
-            Console.WriteLine($"+ {update[middle]}");
+            // Console.WriteLine($"+ {update[middle]}");
             sum += update[middle];
         }
 
